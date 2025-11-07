@@ -109,23 +109,20 @@ stages:
       displayName: "Verify Terraform Installation"
 
     # ☁️ Run Terraform within Azure CLI context
-    - task: AzureCLI@2
+    - task: AwsCli@1
       inputs:
-        azureSubscription: 'it-azure-connection'
-        scriptType: bash
-        scriptLocation: inlineScript
-        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
-        inlineScript: |
-          echo "##[group]Terraform Init/Plan/Apply"
-          terraform init -input=false 
-          terraform plan -input=false -var-file="vars/dev.tfvars"
-          terraform apply -input=false -auto-approve -var-file="vars/dev.tfvars"
-          echo "##[endgroup]"
-          echo "Waiting 10 minutes before running Terraform destroy..."
-          sleep 600
-          echo "##[group]Terraform Destroy"
-          terraform destroy -input=false -auto-approve -var-file="vars/dev.tfvars"
-          aws secretsmanager delete-secret --secret-id my-rds-password-dev --force-delete-without-recovery --region us-east-1
-          echo "##[endgroup]"
+        awsCredentials: 'epicbook-connection-aws'
+        regionName: 'us-east-1'
+        awsCommand: 'sts get-caller-identity'
+      displayName: 'Authenticate with AWS'
 
-      displayName: "Terraform Apply via Azure CLI"
+    - script: |
+        terraform init -input=false
+        terraform plan -input=false -var-file="vars/dev.tfvars"
+        terraform apply -input=false -auto-approve -var-file="vars/dev.tfvars"
+        echo "Waiting 10 minutes before running Terraform destroy..."
+        sleep 600
+        terraform destroy -input=false -auto-approve -var-file="vars/dev.tfvars"
+      workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+      displayName: "Terraform Apply + Destroy"
+
