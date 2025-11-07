@@ -130,11 +130,11 @@ stages:
 
     - script: |
         terraform init -input=false
-        terraform plan -input=false -var-file="vars/dev.tfvars"
-        terraform apply -input=false -auto-approve -var-file="vars/dev.tfvars"
+        terraform plan -input=false
+        terraform apply -input=false -auto-approve
         echo "Waiting 10 minutes before running Terraform destroy..."
         sleep 600
-        terraform destroy -input=false -auto-approve -var-file="vars/dev.tfvars"
+        terraform destroy -input=false -auto-approve
       workingDirectory: $(System.DefaultWorkingDirectory)/terraform
       displayName: "Terraform Apply + Destroy"
 
