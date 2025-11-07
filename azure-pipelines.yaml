@@ -125,5 +125,7 @@ stages:
           sleep 600
           echo "##[group]Terraform Destroy"
           terraform destroy -input=false -auto-approve -var-file="vars/dev.tfvars"
+          aws secretsmanager delete-secret --secret-id my-rds-password-dev --force-delete-without-recovery --region us-east-1
           echo "##[endgroup]"
+
       displayName: "Terraform Apply via Azure CLI"
