@@ -5,6 +5,9 @@ trigger:
   branches:
     include:
       - main
+    
+variables:
+- group: aws-secrets
 
 stages:
 - stage: Ansible
@@ -136,5 +139,8 @@ stages:
         sleep 600
         terraform destroy -input=false -auto-approve
       workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+      env:
+        AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+        AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
       displayName: "Terraform Apply + Destroy"
 
