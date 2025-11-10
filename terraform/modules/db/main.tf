@@ -3,7 +3,7 @@
 # }
 
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "hasmoent-${var.projectname}-dbsubnet-group-${terraform.workspace}"
+  name       = "nkydigitech-${var.projectname}-dbsubnet-group-${terraform.workspace}"
   subnet_ids = var.db_subnet_ids
   tags = var.tags
 }
