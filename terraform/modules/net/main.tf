@@ -41,7 +41,7 @@ resource "aws_subnet" "mysql_privsub2" {
 
 # Security Group: Allow SSH & HTTP
 resource "aws_security_group" "public_sg" {
-  name        = "hasmoent-${var.projectname}-server-sg-${terraform.workspace}"
+  name        = "nkydigitech-${var.projectname}-server-sg-${terraform.workspace}"
   description = "Allow SSH and HTTP inbound traffic"
   vpc_id      = aws_vpc.epicbook_vpc.id # Replace with your VPC ID, or remove if using default VPC
 
@@ -72,7 +72,7 @@ resource "aws_security_group" "public_sg" {
 }
 
 resource "aws_security_group" "private_sg" {
-  name        = "hasmoent-${var.projectname}-mysql-sg-${terraform.workspace}"
+  name        = "nkydigitech-${var.projectname}-mysql-sg-${terraform.workspace}"
   description = "allow 3306 only"
   vpc_id      = aws_vpc.epicbook_vpc.id # Replace with your VPC ID, or remove if using default VPC
 
