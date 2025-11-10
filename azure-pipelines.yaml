@@ -125,7 +125,7 @@ stages:
     # ☁️ Run Terraform within Azure CLI context
     - task: AwsCli@1
       inputs:
-        awsCredentials: 'epicbook-connection-aws'
+        awsCredentials: 'epicbookaws'
         regionName: 'us-east-1'
         awsCommand: 'sts'
         awsSubCommand: 'get-caller-identity'
