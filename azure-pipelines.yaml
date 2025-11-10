@@ -137,7 +137,7 @@ stages:
         terraform apply -input=false -auto-approve
         echo "Waiting 20 minutes before running Terraform destroy..."
         sleep 600
-      #  terraform destroy -input=false -auto-approve
+        terraform destroy -input=false -auto-approve
       workingDirectory: $(System.DefaultWorkingDirectory)/terraform
       env:
         AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
