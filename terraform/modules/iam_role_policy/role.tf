@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ec2_role" {
-  name = "hasmoent-ec2-secrets-role-${terraform.workspace}"
+  name = "nkydigitech-ec2-secrets-role-${terraform.workspace}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
