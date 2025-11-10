@@ -135,7 +135,7 @@ stages:
         terraform init -input=false
         terraform plan -input=false
         terraform apply -input=false -auto-approve
-        echo "Waiting 20 minutes before running Terraform destroy..."
+        echo "Waiting 30 minutes before running Terraform destroy..."
         sleep 900
         terraform destroy -input=false -auto-approve
       workingDirectory: $(System.DefaultWorkingDirectory)/terraform
